@@ -20,6 +20,8 @@ RNA-Seq provides far higher coverage and greater resolution of the dynamic natur
  
  BiocManager::install("Rsubread")
 
+ https://figshare.com/s/f5d63d8c265a05618137 
+
 **LOADING R PACKAGES**
 
 Rsubread provides functions for read alignment and feature counting. It is particularly useful for handling large RNA-seq datasets efficiently.
