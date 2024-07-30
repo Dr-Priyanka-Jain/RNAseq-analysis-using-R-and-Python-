@@ -116,8 +116,7 @@ Treatment : Manipulated for experiment
 
 sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1)
 
-
-
+**DIFFERENTIAL GENE EXPRESSION**
 dgeFull <-DGEList(counts=fc$counts, gene=fc$annotation[,c("GeneID","Length")],group=sampleInfo$condition)
 
 dgeFull <- DGEList(dgeFull$counts[apply(dgeFull$counts, 1, sum) != 0, ],
