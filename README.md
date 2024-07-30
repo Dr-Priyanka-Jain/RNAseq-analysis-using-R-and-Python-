@@ -62,7 +62,7 @@ align(index="chr1_mm10", readfile1=reads1, input_format="FASTQ", output_format="
 
 **OUTPUT FILE**
 
-A BAM file (*.bam) is the compressed binary version of a SAM file that is used to represent aligned sequences up to 128 Mb.
+A BAM file (*.bam) is the compressed binary version of a SAM file that is used to represent aligned sequences.
 BAM files store aligned sequence data, which includes information on where each read maps to the reference genome.
 BAM files contain a header section and an alignment section:
 Header—Contains information about the entire file, such as sample name, sample length, and alignment method. Alignments in the alignments section are associated with specific information in the header section.
@@ -131,10 +131,6 @@ head(dgeFull$counts)
 eff.lib.size <- dgeFull$samples$lib.size*dgeFull$samples$norm.factors
 normCounts <- cpm(dgeFull)
 pseudoNormCounts <- log2(normCounts + 1)
-
-boxplot(pseudoNormCounts, col="gray", las=3)
-plotMDS(pseudoNormCounts)
-
 dgeFull <- estimateCommonDisp(dgeFull)
 dgeFull <- estimateTagwiseDisp(dgeFull)
 dgeFull
