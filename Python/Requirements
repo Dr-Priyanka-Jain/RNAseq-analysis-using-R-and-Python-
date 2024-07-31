@@ -21,3 +21,10 @@ conda create -n pyrpipe python=3.8
 conda activate pyrpipe
 conda install -c bioconda pyrpipe star=2.7.7a sra-tools=2.10.9 stringtie=2.1.4 trim-galore=0.6.6 orfipy=0.0.3 salmon=1.4.0
 ```
+
+
+```
+function test() {
+  console.log("notice the blank line before this function?");
+}
+```
