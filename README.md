@@ -1,4 +1,4 @@
-# RNAseq-analysis-using-R-and-Python
+# RNAseq analysis using R and Python
 
 Welcome to our RNA Sequencing Analysis project! In this repository, we aim to provide a comprehensive guide for performing RNA sequencing analysis using both Python and R. This project is designed for researchers and practitioners who want to leverage the power of these two programming languages for their RNA-seq data analysis.
 
