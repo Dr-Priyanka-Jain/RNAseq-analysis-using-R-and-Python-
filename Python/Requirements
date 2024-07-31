@@ -4,17 +4,18 @@ Create a new conda environment in tutorial:
 
 Before installing `pyrpipe`, make sure conda channels are added in the right order:
 
-```bash
+```
 conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge
 ```
 
 Install pyrpipe and required tools in a conda environment:
-`bash
+`
 conda install -c bioconda pyrpipe
 `
 Create environment
+
 ```
 conda create -n pyrpipe python=3.8
 conda activate pyrpipe
