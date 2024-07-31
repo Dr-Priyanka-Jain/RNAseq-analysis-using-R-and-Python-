@@ -60,7 +60,7 @@ The RNA seq reads are aligned with indexed reference genome.
 
 align(index="chr1_mm10", readfile1=reads1, input_format="FASTQ", output_format="BAM")
 
-**OUTPUT FILE**
+**BAM FILE**
 
 A BAM file (*.bam) is the compressed binary version of a SAM file that is used to represent aligned sequences.
 BAM files store aligned sequence data, which includes information on where each read maps to the reference genome.
@@ -92,18 +92,17 @@ This step is crucial because it provides the raw data for differential expressio
 Feature counting quantifies the number of reads that map to each gene, providing the raw data for subsequent analysis of gene expression.
 
 fc <- featureCounts(files=bamfiles,annot.inbuilt="mm10")
+names(fc)
+
+fc$stat
+
+head(fc$annotation)
 
 write.csv(fc$counts, file = "C:/Users/SUPER/Documents/fc_data.csv")
 
 write.csv(fc$annotation, file = "C:/RNAsequsing_Rsubread/3219673/FC_annotation.csv")
 
 write.csv(fc$targets, file = "C:/RNAseq_using_Rsubread/3219673/FC_targets.csv")
-
-names(fc)
-
-fc$stat
-
-head(fc$annotation)
 
 **LOADING SAMPLE INFORMATION FROM CSV FILE**
 
@@ -113,6 +112,8 @@ Sample Info is used to describe the experimental condition associated with each 
 
 Control : Untreated or baseline state
 Treatment : Manipulated for experiment
+
+
 
 sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1)
 
