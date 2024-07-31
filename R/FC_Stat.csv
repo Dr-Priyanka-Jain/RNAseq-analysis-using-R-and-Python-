@@ -1,0 +1,15 @@
+"","Status","SRR1552452.fastq.gz.subread.BAM","SRR1552453.fastq.gz.subread.BAM","SRR1552454.fastq.gz.subread.BAM","SRR1552455.fastq.gz.subread.BAM"
+"1","Assigned",50,53,55,42
+"2","Unassigned_Unmapped",858,849,867,884
+"3","Unassigned_Read_Type",0,0,0,0
+"4","Unassigned_Singleton",0,0,0,0
+"5","Unassigned_MappingQuality",0,0,0,0
+"6","Unassigned_Chimera",0,0,0,0
+"7","Unassigned_FragmentLength",0,0,0,0
+"8","Unassigned_Duplicate",0,0,0,0
+"9","Unassigned_MultiMapping",0,0,0,0
+"10","Unassigned_Secondary",0,0,0,0
+"11","Unassigned_NonSplit",0,0,0,0
+"12","Unassigned_NoFeatures",90,97,78,74
+"13","Unassigned_Overlapping_Length",0,0,0,0
+"14","Unassigned_Ambiguity",2,1,0,0
