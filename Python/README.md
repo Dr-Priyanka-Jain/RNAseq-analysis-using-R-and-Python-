@@ -1,4 +1,5 @@
 
+
 # Pyrpipe Setup and Usage Guide
 
 ## Introduction
@@ -9,7 +10,7 @@ This guide will walk you through setting up a Conda environment for using **Pyrp
 
 Ensure you have Conda installed on your system. If you don't have Conda, you can install it by following the instructions on the Conda website.
 
-## Step 1: Configure Conda Channels
+### Step 1: Configure Conda Channels
 
 Before installing Pyrpipe, ensure that Conda channels are added in the correct order:
 
@@ -21,7 +22,7 @@ bash
 
 This will ensure that the necessary packages are sourced from the correct channels.
 
-## Step 2: Create a New Conda Environment
+### Step 2: Create a New Conda Environment
 
 Next, create a new Conda environment named `pyrpipe` with Python 3.8:
 
@@ -30,7 +31,7 @@ bash
 `conda create -n pyrpipe python=3.8`
 `conda activate pyrpipe` 
 
-## Step 3: Install Pyrpipe and Required Tools
+### Step 3: Install Pyrpipe and Required Tools
 
 With the environment activated, install Pyrpipe along with the required bioinformatics tools:
 
@@ -48,7 +49,7 @@ This command installs the following tools:
 -   **Orfipy**: Tool for finding open reading frames (ORFs).
 -   **Salmon**: Quantification of transcript abundance.
 
-## Step 4: Download Test Sample Files
+### Step 4: Download Test Sample Files
 
 To get started with Pyrpipe, you'll need a sample dataset. Run the following commands in your bash terminal to download the necessary files:
 
@@ -61,7 +62,7 @@ bash
 
 These commands download the reference genome and GTF file for _Arabidopsis thaliana_ from the Ensembl Plants database.
 
-## Step 5: Simple RNA-Seq Processing Pipeline
+## Simple RNA-Seq Processing Pipeline
 
 RNA-Seq processing with Pyrpipe is straightforward. The following Python script provides a basic example of using Pyrpipe on publicly available RNA-Seq data:
 
@@ -117,9 +118,6 @@ This pipeline downloads FASTQ files from NCBI-SRA, uses Trim Galore for trimming
 
 You are now ready to use Pyrpipe for your RNA-Seq analysis. For more information on how to use Pyrpipe, please refer to the [official documentation](https://pyrpipe.readthedocs.io/).
 
-## License
-
-This project is licensed under the MIT License - see the `LICENSE` file for details.
 
 ## Contact
 
