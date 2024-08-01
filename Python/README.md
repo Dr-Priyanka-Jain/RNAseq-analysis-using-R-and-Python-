@@ -8,7 +8,8 @@ This guide will walk you through setting up a Conda environment for using **Pyrp
 
 ## Prerequisites
 
-Ensure you have Conda installed on your system. If you don't have Conda, you can install it by following the instructions on the Conda website.
+Ensure you have Conda installed on your system. If you don't have Conda, you can install it by following the instructions on the Conda website-
+https://docs.anaconda.com/miniconda/
 
 ### Step 1: Configure Conda Channels
 
