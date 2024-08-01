@@ -48,13 +48,13 @@ Rsubread provides functions for read alignment and feature counting. It is parti
 Limma is an R/Bioconductor software package that provides an integrated solution for analysing data from gene expression experiments. It contains rich features for handling complex experimental designs and for information borrowing to overcome the problem of small sample sizes.
 
 edgeR: a Bioconductor package for differential expression analysis of digital gene expression data.
-
+```
 library(Rsubread)
 
 library(limma)
 
 library(edgeR)
-
+```
 
 ### STEP 2 : QC of the raw reads
 FastQc to check the quality of raw reads
