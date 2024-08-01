@@ -175,7 +175,12 @@ normCounts <- cpm(dgeFull)
 
 pseudoNormCounts <- log2(normCounts + 1)
 
+**estimateCommonDisp Estimate Common Negative Binomial Dispersion by Conditional Maximum Likelihood**
+
 dgeFull <- estimateCommonDisp(dgeFull)
+
+
+**EstimateTagwiseDisp Estimate Empirical Bayes Tagwise Dispersion Values
 
 dgeFull <- estimateTagwiseDisp(dgeFull)
 
