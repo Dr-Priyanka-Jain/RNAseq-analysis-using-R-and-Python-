@@ -13,3 +13,4 @@ RNA sequencing (RNA-seq) is a powerful technique that allows researchers to stud
 **Python Analysis with Pyripe**: Following our R analysis, we will transition to Python, utilizing the Pyripe library for RNA-seq data analysis. Pyripe is designed for efficient RNA-seq data processing and offers a variety of features to facilitate your analysis. We will provide step-by-step instructions and code snippets to help you implement your RNA-seq workflow in Python.
 
 **Instructors**
+Dr Priyanka Jain
