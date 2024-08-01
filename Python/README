@@ -3,7 +3,7 @@
 ##Before installing `pyrpipe`, make sure conda channels are added in the right order:
 
 ```
-conda config --add channels defaults
+**conda config --add channels defaults**
 conda config --add channels bioconda
 conda config --add channels conda-forge
 ```
