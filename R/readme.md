@@ -1,4 +1,4 @@
-# RNAseq-analysis-using-R-and-Python
+# RNAseq analysis using R and Python
 
 **Bulk RNA-seq analysis using python (pyrpipe) and R (Rsubread)**
 
@@ -11,7 +11,8 @@ RNA-Seq provides far higher coverage and greater resolution of the dynamic natur
 
  Windows OS (at least 8GB RAM) with working Power shell
  
- Install R(version "4.4")
+ Install R(version "4.4") - https://cran.r-project.org/bin/windows/base/
+ Install RStudio - https://posit.co/download/rstudio-desktop/
  
  After installing R run the following command to install Rsubread:
  
