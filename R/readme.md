@@ -27,7 +27,9 @@ BiocManager::install("edgeR")
 
 BiocManager::install("limma")
 
-https://figshare.com/s/f5d63d8c265a05618137 - Download the reference genome from this link.The files are named as chr1_mm10, chr1_mm10.files, chr1_mm10.00.b.tab and chr1_mm10.00.b.array.
+**Download the reference genome from this link
+
+https://figshare.com/s/f5d63d8c265a05618137 - The files are named as chr1_mm10, chr1_mm10.files, chr1_mm10.00.b.tab and chr1_mm10.00.b.array.
 
 Download all the files given under the R folder.
 
@@ -35,7 +37,7 @@ Download all the files given under the R folder.
 
 Rsubread provides functions for read alignment and feature counting. It is particularly useful for handling large RNA-seq datasets efficiently.
 
-Limma powers differential expression analyses for RNA-sequencing and microarray studies.
+Limma is an R/Bioconductor software package that provides an integrated solution for analysing data from gene expression experiments. It contains rich features for handling complex experimental designs and for information borrowing to overcome the problem of small sample sizes.
 
 edgeR: a Bioconductor package for differential expression analysis of digital gene expression data.
 
@@ -100,18 +102,19 @@ The next step is to count the number of reads that map to each gene using the â€
 This step is crucial because it provides the raw data for differential expression analysis. 
 Feature counting quantifies the number of reads that map to each gene, providing the raw data for subsequent analysis of gene expression.
 
-```fc <- featureCounts(files=bamfiles,annot.inbuilt="mm10")
-names(fc)
+```fc <- featureCounts(files=bamfiles,annot.inbuilt="mm10")```
 
-fc$stat
+```names(fc)```
 
-head(fc$annotation)
+```fc$stat```
 
-write.csv(fc$counts, file = "C:/Users/SUPER/Documents/fc_data.csv")
+```head(fc$annotation)```
 
-write.csv(fc$annotation, file = "C:/RNAsequsing_Rsubread/3219673/FC_annotation.csv")
+```write.csv(fc$counts, file = "C:/Users/SUPER/Documents/fc_data.csv")```
 
-write.csv(fc$targets, file = "C:/RNAseq_using_Rsubread/3219673/FC_targets.csv")```
+```write.csv(fc$annotation, file = "C:/RNAsequsing_Rsubread/3219673/FC_annotation.csv")```
+
+```write.csv(fc$targets, file = "C:/RNAseq_using_Rsubread/3219673/FC_targets.csv")```
 
 **LOADING SAMPLE INFORMATION FROM CSV FILE**
 
@@ -128,39 +131,39 @@ Treatment : Manipulated for experiment
 
 
 
-```dgeFull <-DGEList(counts=fc$counts, gene=fc$annotation[,c("GeneID","Length")],group=sampleInfo$condition)
+```dgeFull <-DGEList(counts=fc$counts, gene=fc$annotation[,c("GeneID","Length")],group=sampleInfo$condition)```
 
-dgeFull <- DGEList(dgeFull$counts[apply(dgeFull$counts, 1, sum) != 0, ],
-                   group=dgeFull$samples$group)
+```dgeFull <- DGEList(dgeFull$counts[apply(dgeFull$counts, 1, sum) != 0, ],group=dgeFull$samples$group)```
                    
-head(dgeFull$counts)
-dgeFull <- calcNormFactors(dgeFull, method="TMM")
+```head(dgeFull$counts)```
 
-dgeFull$samples
+```dgeFull <- calcNormFactors(dgeFull, method="TMM")```
 
-head(dgeFull$counts)
+```dgeFull$samples```
 
-eff.lib.size <- dgeFull$samples$lib.size*dgeFull$samples$norm.factors
+```head(dgeFull$counts)```
 
-normCounts <- cpm(dgeFull)
+```eff.lib.size <- dgeFull$samples$lib.size*dgeFull$samples$norm.factors```
 
-pseudoNormCounts <- log2(normCounts + 1)
+```normCounts <- cpm(dgeFull)```
 
-dgeFull <- estimateCommonDisp(dgeFull)
+```pseudoNormCounts <- log2(normCounts + 1)```
 
-dgeFull <- estimateTagwiseDisp(dgeFull)
+```dgeFull <- estimateCommonDisp(dgeFull)```
 
-dgeFull
+```dgeFull <- estimateTagwiseDisp(dgeFull)```
 
-dgeTest <- exactTest(dgeFull)
+```dgeFull```
 
-dgeTest
+```dgeTest <- exactTest(dgeFull)```
 
-write.csv(dgeTest, file = "C:/RNAseq using_Rsubread/3219673/dgeTest.csv")
+```dgeTest```
 
-hist(dgeTest$table[,"PValue"], breaks=50)
+```write.csv(dgeTest, file = "C:/RNAseq using_Rsubread/3219673/dgeTest.csv")```
 
-hist(dgeTestFilt$table[,"PValue"], breaks=50)```
+```hist(dgeTest$table[,"PValue"], breaks=50)```
+
+```hist(dgeTestFilt$table[,"PValue"], breaks=50)```
 
 
 
