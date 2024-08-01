@@ -1,6 +1,6 @@
-# Create a new conda environment in tutorial: 
+#Create a new conda environment in tutorial: 
 
-## Before installing `pyrpipe`, make sure conda channels are added in the right order:
+##Before installing `pyrpipe`, make sure conda channels are added in the right order:
 
 ```
 conda config --add channels defaults
