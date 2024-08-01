@@ -1,3 +1,4 @@
+
 # Pyrpipe Setup and Usage Guide
 
 ## Introduction
@@ -13,9 +14,6 @@ Ensure you have Conda installed on your system. If you don't have Conda, you can
 Before installing Pyrpipe, ensure that Conda channels are added in the correct order:
 
 bash
-``` conda config --add channels defaults
-conda config --add channels bioconda
-conda config --add channels conda-forge ```
 
 `conda config --add channels defaults
 conda config --add channels bioconda
@@ -30,7 +28,7 @@ Next, create a new Conda environment named `pyrpipe` with Python 3.8:
 bash
 
 `conda create -n pyrpipe python=3.8
-conda activate pyrpipe`
+conda activate pyrpipe` 
 
 ## Step 3: Install Pyrpipe and Required Tools
 
