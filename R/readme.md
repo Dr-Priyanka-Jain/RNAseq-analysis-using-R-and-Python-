@@ -144,7 +144,7 @@ Treatment : Manipulated for experiment
 
 ```sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1)```
 
-### DIFFERENTIAL GENE EXPRESSION
+### STEP 9:  DIFFERENTIAL GENE EXPRESSION
 
 
 
@@ -181,6 +181,10 @@ Treatment : Manipulated for experiment
 ```hist(dgeTest$table[,"PValue"], breaks=50)```
 
 ```hist(dgeTestFilt$table[,"PValue"], breaks=50)```
+
+### CONTACT INFORMAIION
+
+For any queries,contact Priyanka thareja at priyankathareja10@gmail.com.
 
 
 
