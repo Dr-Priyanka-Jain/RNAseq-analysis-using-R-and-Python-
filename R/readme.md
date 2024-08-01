@@ -51,7 +51,7 @@ FASTQ files are a common format used to store raw sequence data from high-throug
 FastQ files contains raw sequencing reads. Each file represents reads from a specific sample. 
 This step is important because it allows us to identify all the FASTQ files in the directory, ensuring that we process all available samples.
 
-/reads1 <- list.files(path=".", pattern="*.fastq.gz$")
+```reads1 <- list.files(path=".", pattern="*.fastq.gz$")```
 
 **BUILDING INDEX FOR REFERENCE GENOME**
 
