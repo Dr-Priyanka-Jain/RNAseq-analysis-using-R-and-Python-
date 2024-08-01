@@ -27,11 +27,6 @@ BiocManager::install("edgeR")
 
 BiocManager::install("limma")
 ```
-Set the working directory in R:
-
-`setwd("C:/path/to/your/directory")`
-
-
 The input files for the RNAseq analysis are to be  downlaoded from link : https://figshare.com/s/f5d63d8c265a05618137 OR from the R folder
 
 - SRR1552444.fastq.gz
@@ -42,9 +37,15 @@ The input files for the RNAseq analysis are to be  downlaoded from link : https:
 
 - SRR1552455.fastq.gz
 
-**Download the reference genome from this link : https://figshare.com/s/f5d63d8c265a05618137. The following files are te refrence files named as chr1_mm10 and the index file named: chr1_mm10.files, chr1_mm10.00.b.tab and chr1_mm10.00.b.array.
+**Download the reference genome from this link : 
+
+https://figshare.com/s/f5d63d8c265a05618137.The following files are te refrence files named as chr1_mm10 and the index file named: chr1_mm10.files, chr1_mm10.00.b.tab and chr1_mm10.00.b.array.
 
 Download all the files given under the R folder.
+
+Set the working directory in R to where you have downloaded all the files:
+
+`setwd("C:/path/to/your/directory")`
 
 ### Step 1 : Loading R Packages
 
