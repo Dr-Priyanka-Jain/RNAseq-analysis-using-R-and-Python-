@@ -9,27 +9,27 @@ RNA-Seq provides far higher coverage and greater resolution of the dynamic natur
 
 **PREREQUISITES FOR R**
 
- Windows OS (at least 8GB RAM) with working Power shell
+Windows OS (at least 8GB RAM) with working Power shell
  
- Install R(version "4.4") - https://cran.r-project.org/bin/windows/base/
+Install R(version "4.4") - https://cran.r-project.org/bin/windows/base/
  
- Install RStudio - https://posit.co/download/rstudio-desktop/
+Install RStudio - https://posit.co/download/rstudio-desktop/
  
- After installing R run the following command to install Rsubread:
+After installing R run the following command to install Rsubread:
  
- if (!require("BiocManager", quietly = TRUE))
+if (!require("BiocManager", quietly = TRUE))
  
- install.packages("BiocManager")
+install.packages("BiocManager")
  
- BiocManager::install("Rsubread")
+BiocManager::install("Rsubread")
 
- BiocManager::install("edgeR")
+BiocManager::install("edgeR")
 
 BiocManager::install("limma")
 
-https://figshare.com/s/f5d63d8c265a05618137 - Download the reference genome from this link.  The files are named as chr1_mm10, chr1_mm10.files, chr1_mm10.00.b.tab and chr1_mm10.00.b.array.
+https://figshare.com/s/f5d63d8c265a05618137 - Download the reference genome from this link.The files are named as chr1_mm10, chr1_mm10.files, chr1_mm10.00.b.tab and chr1_mm10.00.b.array.
 
- Download all the files given under the R folder.
+Download all the files given under the R folder.
 
 **LOADING R PACKAGES**
 
