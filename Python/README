@@ -1,0 +1,9 @@
+Run these lines on your bash terminal to get the test sample file necessary-
+TEST SAMPLE FILES:
+
+ wget ftp://ftp.ensemblgenomes.org/pub/release-46/plants/fasta/arabidopsis_thaliana/
+ →dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
+ gunzip Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
+ wget ftp://ftp.ensemblgenomes.org/pub/release-46/plants/gtf/arabidopsis_thaliana/
+ →Arabidopsis_thaliana.TAIR10.46.gtf.gz
+ gunzip Arabidopsis_thaliana.TAIR10.46.gtf.gz
