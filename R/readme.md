@@ -58,7 +58,7 @@ This step is important because it allows us to identify all the FASTQ files in t
 Indexing a reference genome is the process of generating a set of data structures that facilitate rapid access to specific locations within the genomic sequence. 
 This process involves mapping the sequence of nucleotides in the genome into a format that can be efficiently searched, enabling bioinformatics tools to quickly locate and align sequencing reads to the reference genome. Indexing is crucial for improving the performance and speed of downstream analyses, such as alignment and variant detection.
 
-buildindex(basename="chr1_mm10",reference="chr1.fa")
+```buildindex(basename="chr1_mm10",reference="chr1.fa")```
 
 **ALIGNMENT**
 
@@ -67,7 +67,7 @@ The input format is indicated as “FASTQ” to show the input files are in FAST
 The output format is specifies as “BAM” to indicate that the output should be in BAM format.
 The RNA seq reads are aligned with indexed reference genome.
 
-align(index="chr1_mm10", readfile1=reads1, input_format="FASTQ", output_format="BAM")
+```align(index="chr1_mm10", readfile1=reads1, input_format="FASTQ", output_format="BAM")```
 
 **BAM FILE**
 
@@ -91,7 +91,7 @@ NM: Edit distance tag, which records the Levenshtein distance between the read a
 
 XN: Amplicon name tag, which records the amplicon tile ID associated with the read.
 
-bamfiles <-list.files(path=".",pattern = "*.BAM$")
+```bamfiles <-list.files(path=".",pattern = "*.BAM$")```
 
 **FEATURE COUNTS**
 
@@ -100,7 +100,7 @@ The next step is to count the number of reads that map to each gene using the �
 This step is crucial because it provides the raw data for differential expression analysis. 
 Feature counting quantifies the number of reads that map to each gene, providing the raw data for subsequent analysis of gene expression.
 
-fc <- featureCounts(files=bamfiles,annot.inbuilt="mm10")
+```fc <- featureCounts(files=bamfiles,annot.inbuilt="mm10")
 names(fc)
 
 fc$stat
@@ -111,7 +111,7 @@ write.csv(fc$counts, file = "C:/Users/SUPER/Documents/fc_data.csv")
 
 write.csv(fc$annotation, file = "C:/RNAsequsing_Rsubread/3219673/FC_annotation.csv")
 
-write.csv(fc$targets, file = "C:/RNAseq_using_Rsubread/3219673/FC_targets.csv")
+write.csv(fc$targets, file = "C:/RNAseq_using_Rsubread/3219673/FC_targets.csv")```
 
 **LOADING SAMPLE INFORMATION FROM CSV FILE**
 
@@ -122,13 +122,13 @@ Sample Info is used to describe the experimental condition associated with each 
 Control : Untreated or baseline state
 Treatment : Manipulated for experiment
 
-sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1)
+```sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1)```
 
 **DIFFERENTIAL GENE EXPRESSION**
 
 
 
-dgeFull <-DGEList(counts=fc$counts, gene=fc$annotation[,c("GeneID","Length")],group=sampleInfo$condition)
+```dgeFull <-DGEList(counts=fc$counts, gene=fc$annotation[,c("GeneID","Length")],group=sampleInfo$condition)
 
 dgeFull <- DGEList(dgeFull$counts[apply(dgeFull$counts, 1, sum) != 0, ],
                    group=dgeFull$samples$group)
@@ -160,7 +160,7 @@ write.csv(dgeTest, file = "C:/RNAseq using_Rsubread/3219673/dgeTest.csv")
 
 hist(dgeTest$table[,"PValue"], breaks=50)
 
-hist(dgeTestFilt$table[,"PValue"], breaks=50)
+hist(dgeTestFilt$table[,"PValue"], breaks=50)```
 
 
 
