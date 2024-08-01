@@ -67,40 +67,36 @@ RNA-Seq processing with Pyrpipe is straightforward. The following Python script 
 
 python
 
-`from pyrpipe import sra, qc, mapping, assembly`
 
-# Define some variables
-`run_id = 'SRR976159'
+```from pyrpipe import sra, qc, mapping, assembly
+
+#define some variables
+run_id = 'SRR976159'
 working_dir = 'example_output'
 gen = 'Arabidopsis_thaliana.TAIR10.dna.toplevel.fa'
 ann = 'Arabidopsis_thaliana.TAIR10.46.gtf'
-star_index = 'star_index/athaliana'`
+star_index = 'star_index/athaliana'
 
-# Initialize objects
+#initialize objects
+#creates a STAR object to use with threads
+star = mapping.Star(index=star_index, genome=gen, threads=4)
 
-Create a STAR object to use with threads
+#use Trim Galore for trimming
+trim_galore = qc.Trimgalore()
 
-`star = mapping.Star(index=star_index, genome=gen, threads=4)`
+#Stringtie for assembly
+stringtie = assembly.Stringtie(guide=ann)
 
-Use Trim Galore for trimming
+#create SRA object; this will download FASTQ if it doesn't exist
+srr_object = sra.SRA(run_id, directory=working_dir)
 
-`trim_galore = qc.Trimgalore()`
+#create a pipeline using the objects
+srr_object.trim(trim_galore).align(star).assemble(stringtie)
 
-Stringtie for assembly
+#The assembled transcripts are in srr_object.gtf
+print('Final result', srr_object.gtf)
+```
 
-`stringtie = assembly.Stringtie(guide=ann)`
-
-Create an SRA object; this will download FASTQ if it doesn't exist
-
-`srr_object = sra.SRA(run_id, directory=working_dir)`
-
-Create a pipeline using the objects
-
-`srr_object.trim(trim_galore).align(star).assemble(stringtie)`
-
-The assembled transcripts are in srr_object.gtf
-
-`print('Final result', srr_object.gtf)` 
 
 ### Explanation of the Code
 
