@@ -144,7 +144,7 @@ Control : Untreated or baseline state
 
 Treatment : Manipulated for experiment
 
-`sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1)`
+` sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1) `
 
 ### STEP 9:  DIFFERENTIAL GENE EXPRESSION
 
@@ -187,7 +187,8 @@ hist(dgeTestFilt$table[,"PValue"], breaks=50)
 
 ### CONTACT INFORMAIION
 
-For any queries,contact Priyanka thareja at priyankathareja10@gmail.com.
+For any questions or issues, please contact Priyanka at priyankathareja10@gmail.com.
+
 
 
 
