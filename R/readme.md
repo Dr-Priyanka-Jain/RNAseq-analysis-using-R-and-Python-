@@ -9,7 +9,7 @@ RNA-Seq provides far higher coverage and greater resolution of the dynamic natur
 
 **PREREQUISITES FOR R**
 
-Windows OS (at least 8GB RAM) with working Power shell
+Windows OS (at least 8GB RAM) with working command line
  
 Install R(version "4.4") - https://cran.r-project.org/bin/windows/base/
  
