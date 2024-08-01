@@ -29,13 +29,13 @@ BiocManager::install("limma")
 ```
 The input files for the RNAseq analysis are to be  downlaoded from link : https://figshare.com/s/f5d63d8c265a05618137 OR from the R folder
 
-SRR1552444.fastq.gz
+- SRR1552444.fastq.gz
 
-SRR1552445.fastq.gz
+- SRR1552445.fastq.gz
 
-SRR1552454.fastq.gz
+- SRR1552454.fastq.gz
 
-SRR1552455.fastq.gz
+- SRR1552455.fastq.gz
 
 **Download the reference genome from this link : https://figshare.com/s/f5d63d8c265a05618137. The following files are te refrence files named as chr1_mm10 and the index file named: chr1_mm10.files, chr1_mm10.00.b.tab and chr1_mm10.00.b.array.
 
@@ -70,7 +70,7 @@ FASTQ files are a common format used to store raw sequence data from high-throug
 FastQ files contains raw sequencing reads. Each file represents reads from a specific sample. 
 This step is important because it allows us to identify all the FASTQ files in the directory, ensuring that we process all available samples.
 
-reads1 <- list.files(path=".", pattern="*.fastq.gz$")
+``reads1 <- list.files(path=".", pattern="*.fastq.gz$")``
 
 ### STEP 4 : BUILDING INDEX FOR REFERENCE GENOME
 
@@ -99,17 +99,17 @@ Alignments—Contains read name, read sequence, read quality, alignment informat
 
 The alignments section includes the following information for each or read pair:
 
-RG: Read group, which indicates the number of reads for a specific sample.
+- RG: Read group, which indicates the number of reads for a specific sample.
 
-BC: Barcode tag, which indicates the demultiplexed sample ID associated with the read.
+- BC: Barcode tag, which indicates the demultiplexed sample ID associated with the read.
 
-SM: Single-end alignment quality.
+- SM: Single-end alignment quality.
 
-AS: Paired-end alignment quality.
+- AS: Paired-end alignment quality.
 
-NM: Edit distance tag, which records the Levenshtein distance between the read and the reference.
+- NM: Edit distance tag, which records the Levenshtein distance between the read and the reference.
 
-XN: Amplicon name tag, which records the amplicon tile ID associated with the read.
+- XN: Amplicon name tag, which records the amplicon tile ID associated with the read.
 
 `bamfiles <-list.files(path=".",pattern = "*.BAM$")`
 
