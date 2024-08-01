@@ -1,6 +1,6 @@
 # RNAseq analysis using R and Python
 
-**Bulk RNA-seq analysis using python (pyrpipe) and R (Rsubread)**
+**Bulk RNA-seq analysis using R (Rsubread) AND python (pyrpipe)**
 
 **RNA SEQUENCING**
 
