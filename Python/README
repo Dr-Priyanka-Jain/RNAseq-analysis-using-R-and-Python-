@@ -1,4 +1,4 @@
-Run these lines on your bash terminal to get the test sample file necessary-
+#Run these lines on your bash terminal to get the test sample file necessary-
 TEST SAMPLE FILES:
 
  wget ftp://ftp.ensemblgenomes.org/pub/release-46/plants/fasta/arabidopsis_thaliana/
