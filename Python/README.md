@@ -15,9 +15,9 @@ Before installing Pyrpipe, ensure that Conda channels are added in the correct o
 
 bash
 
-`conda config --add channels defaults
-conda config --add channels bioconda
-conda config --add channels conda-forge` 
+`conda config --add channels defaults`
+`conda config --add channels bioconda`
+`conda config --add channels conda-forge`
 
 This will ensure that the necessary packages are sourced from the correct channels.
 
@@ -27,8 +27,8 @@ Next, create a new Conda environment named `pyrpipe` with Python 3.8:
 
 bash
 
-`conda create -n pyrpipe python=3.8
-conda activate pyrpipe` 
+`conda create -n pyrpipe python=3.8`
+`conda activate pyrpipe` 
 
 ## Step 3: Install Pyrpipe and Required Tools
 
@@ -54,10 +54,10 @@ To get started with Pyrpipe, you'll need a sample dataset. Run the following com
 
 bash
 
-`wget ftp://ftp.ensemblgenomes.org/pub/release-46/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
-gunzip Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
-wget ftp://ftp.ensemblgenomes.org/pub/release-46/plants/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.46.gtf.gz
-gunzip Arabidopsis_thaliana.TAIR10.46.gtf.gz` 
+`wget ftp://ftp.ensemblgenomes.org/pub/release-46/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz`
+`gunzip Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz`
+`wget ftp://ftp.ensemblgenomes.org/pub/release-46/plants/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.46.gtf.gz`
+`gunzip Arabidopsis_thaliana.TAIR10.46.gtf.gz` 
 
 These commands download the reference genome and GTF file for _Arabidopsis thaliana_ from the Ensembl Plants database.
 
