@@ -12,24 +12,32 @@ RNA-Seq provides far higher coverage and greater resolution of the dynamic natur
  Windows OS (at least 8GB RAM) with working Power shell
  
  Install R(version "4.4") - https://cran.r-project.org/bin/windows/base/
+ 
  Install RStudio - https://posit.co/download/rstudio-desktop/
  
  After installing R run the following command to install Rsubread:
  
  if (!require("BiocManager", quietly = TRUE))
+ 
  install.packages("BiocManager")
  
  BiocManager::install("Rsubread")
 
- https://figshare.com/s/f5d63d8c265a05618137 
+ BiocManager::install("edgeR")
+
+BiocManager::install("limma")
+
+https://figshare.com/s/f5d63d8c265a05618137 - Download the reference genome from this link.  The files are named as chr1_mm10, chr1_mm10.files, chr1_mm10.00.b.tab and chr1_mm10.00.b.array.
+
+ Download all the files given under the R folder.
 
 **LOADING R PACKAGES**
 
 Rsubread provides functions for read alignment and feature counting. It is particularly useful for handling large RNA-seq datasets efficiently.
 
-Limma stands for Linear Models for Microarray Data. It is widely used for the analysis of gene expression data.
+Limma powers differential expression analyses for RNA-sequencing and microarray studies.
 
-edgeR stands for Empirical Analysis of Digital Gene Expression Data in R. It is designed for differential expression analysis of RNA-seq count data. It uses statistical methods to model the read counts and test for differential expression.
+edgeR: a Bioconductor package for differential expression analysis of digital gene expression data.
 
 library(Rsubread)
 
@@ -114,11 +122,11 @@ Sample Info is used to describe the experimental condition associated with each 
 Control : Untreated or baseline state
 Treatment : Manipulated for experiment
 
-
-
 sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1)
 
 **DIFFERENTIAL GENE EXPRESSION**
+
+
 
 dgeFull <-DGEList(counts=fc$counts, gene=fc$annotation[,c("GeneID","Length")],group=sampleInfo$condition)
 
@@ -129,14 +137,23 @@ head(dgeFull$counts)
 dgeFull <- calcNormFactors(dgeFull, method="TMM")
 
 dgeFull$samples
+
 head(dgeFull$counts)
+
 eff.lib.size <- dgeFull$samples$lib.size*dgeFull$samples$norm.factors
+
 normCounts <- cpm(dgeFull)
+
 pseudoNormCounts <- log2(normCounts + 1)
+
 dgeFull <- estimateCommonDisp(dgeFull)
+
 dgeFull <- estimateTagwiseDisp(dgeFull)
+
 dgeFull
+
 dgeTest <- exactTest(dgeFull)
+
 dgeTest
 
 write.csv(dgeTest, file = "C:/RNAseq using_Rsubread/3219673/dgeTest.csv")
