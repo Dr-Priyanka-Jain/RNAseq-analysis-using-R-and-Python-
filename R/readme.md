@@ -59,7 +59,8 @@ library(edgeR)
 ### STEP 2 : QC of the raw reads
 FastQc to check the quality of raw reads
 
-Download froom the link below: 
+Download from the link below: 
+
 https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
 
 
@@ -69,7 +70,8 @@ FASTQ files are a common format used to store raw sequence data from high-throug
 FastQ files contains raw sequencing reads. Each file represents reads from a specific sample. 
 This step is important because it allows us to identify all the FASTQ files in the directory, ensuring that we process all available samples.
 
-``reads1 <- list.files(path=".", pattern="*.fastq.gz$")``
+reads1 <- list.files(path=".", pattern="*.fastq.gz$")
+
 ### STEP 4 : BUILDING INDEX FOR REFERENCE GENOME
 
 Indexing a reference genome is the process of generating a set of data structures that facilitate rapid access to specific locations within the genomic sequence. 
