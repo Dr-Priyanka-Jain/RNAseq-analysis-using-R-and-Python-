@@ -27,9 +27,14 @@ BiocManager::install("edgeR")
 
 BiocManager::install("limma")
 
-**Download the reference genome from this link
+The input files for the RNAseq analysis are to be  downlaoded from link : https://figshare.com/s/f5d63d8c265a05618137 OR from the R folder
 
-https://figshare.com/s/f5d63d8c265a05618137 - The files are named as chr1_mm10, chr1_mm10.files, chr1_mm10.00.b.tab and chr1_mm10.00.b.array.
+SRR1552444.fastq.gz
+SRR1552445.fastq.gz
+SRR1552454.fastq.gz
+SRR1552455.fastq.gz
+
+**Download the reference genome from this link : https://figshare.com/s/f5d63d8c265a05618137. The following files are te refrence files named as chr1_mm10 and the index file named: chr1_mm10.files, chr1_mm10.00.b.tab and chr1_mm10.00.b.array.
 
 Download all the files given under the R folder.
 
@@ -47,6 +52,14 @@ library(limma)
 
 library(edgeR)
 
+
+**QC of the raw reads**
+FastQc to check the quality of raw reads
+
+Download froom the link below: 
+https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+
+
 **LISTING FASTQ FILES FOR ANALYSIS**
 
 FASTQ files are a common format used to store raw sequence data from high-throughput sequencing experiments. Each FASTQ file contains sequences of nucleotides along with their corresponding quality scores. 
@@ -58,7 +71,7 @@ This step is important because it allows us to identify all the FASTQ files in t
 **BUILDING INDEX FOR REFERENCE GENOME**
 
 Indexing a reference genome is the process of generating a set of data structures that facilitate rapid access to specific locations within the genomic sequence. 
-This process involves mapping the sequence of nucleotides in the genome into a format that can be efficiently searched, enabling bioinformatics tools to quickly locate and align sequencing reads to the reference genome. Indexing is crucial for improving the performance and speed of downstream analyses, such as alignment and variant detection.
+ Indexing is crucial for improving the performance and speed of downstream analyses, such as alignment and variant detection.
 
 ```buildindex(basename="chr1_mm10",reference="chr1.fa")```
 
@@ -66,6 +79,7 @@ This process involves mapping the sequence of nucleotides in the genome into a f
 
 The next step is to align the RNA-seq reads to the reference genome using the “align” function from the Rsubread package.
 The input format is indicated as “FASTQ” to show the input files are in FASTQ format.
+This process involves mapping the sequence of nucleotides in the genome into a format that can be efficiently searched, enabling bioinformatics tools to quickly locate and align sequencing reads to the reference genome.
 The output format is specifies as “BAM” to indicate that the output should be in BAM format.
 The RNA seq reads are aligned with indexed reference genome.
 
