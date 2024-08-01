@@ -27,6 +27,11 @@ BiocManager::install("edgeR")
 
 BiocManager::install("limma")
 ```
+Set the working directory in R:
+
+`setwd("C:/path/to/your/directory")`
+
+
 The input files for the RNAseq analysis are to be  downlaoded from link : https://figshare.com/s/f5d63d8c265a05618137 OR from the R folder
 
 - SRR1552444.fastq.gz
