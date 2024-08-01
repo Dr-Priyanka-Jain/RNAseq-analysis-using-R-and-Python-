@@ -1,13 +1,13 @@
 # RNAseq analysis using R and Python
 
-**##Bulk RNA-seq analysis using R (Rsubread) AND python (pyrpipe)**
+## Bulk RNA-seq analysis using R (Rsubread) AND python (pyrpipe)
 
-**###RNA SEQUENCING**
+### RNA SEQUENCING
 
 RNA sequencing (RNA-Seq) uses the capabilities of high-throughput sequencing methods to provide insight into the transcriptome of a cell. 
 RNA-Seq provides far higher coverage and greater resolution of the dynamic nature of the transcriptome. 
 
-**###PREREQUISITES FOR R**
+### PREREQUISITES FOR R
 
 Windows OS (at least 8GB RAM) with working command line
  
@@ -41,7 +41,7 @@ SRR1552455.fastq.gz
 
 Download all the files given under the R folder.
 
-**###STEP 1 : LOADING R PACKAGES**
+### STEP 1 : LOADING R PACKAGES
 
 Rsubread provides functions for read alignment and feature counting. It is particularly useful for handling large RNA-seq datasets efficiently.
 
@@ -56,14 +56,14 @@ library(limma)
 library(edgeR)
 
 
-**###STEP 2 :QC of the raw reads**
+### STEP 2 : QC of the raw reads
 FastQc to check the quality of raw reads
 
 Download froom the link below: 
 https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
 
 
-**###STEP 3 : LISTING FASTQ FILES FOR ANALYSIS**
+### STEP 3 : LISTING FASTQ FILES FOR ANALYSIS**
 
 FASTQ files are a common format used to store raw sequence data from high-throughput sequencing experiments. Each FASTQ file contains sequences of nucleotides along with their corresponding quality scores. 
 FastQ files contains raw sequencing reads. Each file represents reads from a specific sample. 
@@ -71,14 +71,14 @@ This step is important because it allows us to identify all the FASTQ files in t
 
 ```reads1 <- list.files(path=".", pattern="*.fastq.gz$")```
 
-**###STEP 4 : BUILDING INDEX FOR REFERENCE GENOME**
+### STEP 4 : BUILDING INDEX FOR REFERENCE GENOME
 
 Indexing a reference genome is the process of generating a set of data structures that facilitate rapid access to specific locations within the genomic sequence. 
  Indexing is crucial for improving the performance and speed of downstream analyses, such as alignment and variant detection.
 
 ```buildindex(basename="chr1_mm10",reference="chr1.fa")```
 
-**###STEP 5 : ALIGNMENT**
+### STEP 5 : ALIGNMENT
 
 The next step is to align the RNA-seq reads to the reference genome using the “align” function from the Rsubread package.
 The input format is indicated as “FASTQ” to show the input files are in FASTQ format.
@@ -88,7 +88,7 @@ The RNA seq reads are aligned with indexed reference genome.
 
 ```align(index="chr1_mm10", readfile1=reads1, input_format="FASTQ", output_format="BAM")```
 
-**###STEP 6 : BAM FILE**
+### STEP 6 : BAM FILE
 
 A BAM file (*.bam) is the compressed binary version of a SAM file that is used to represent aligned sequences.
 BAM files store aligned sequence data, which includes information on where each read maps to the reference genome.
@@ -112,7 +112,7 @@ XN: Amplicon name tag, which records the amplicon tile ID associated with the re
 
 ```bamfiles <-list.files(path=".",pattern = "*.BAM$")```
 
-**###STEP 7 : FEATURE COUNTS**
+### STEP 7 : FEATURE COUNTS
 
 FeatureCounts is a function under RSubread used in bioinformatics for counting the number of reads (from RNA sequencing) that map to genomic features such as genes, exons, or genomic regions. It is part of the Subread package.
 The next step is to count the number of reads that map to each gene using the “featureCounts” function.
@@ -133,7 +133,7 @@ Feature counting quantifies the number of reads that map to each gene, providing
 
 ```write.csv(fc$targets, file = "C:/RNAseq_using_Rsubread/3219673/FC_targets.csv")```
 
-**###STEP 8 : LOADING SAMPLE INFORMATION FROM CSV FILE**
+### STEP 8 : LOADING SAMPLE INFORMATION FROM CSV FILE
 
 Reading sample information provides the metadata needed for differential expression analysis, linking read counts to experimental conditions and ensuring accurate statistical analysis.
 A sample file needs to be created with the information given in the image and save the file with .csv extension.
@@ -144,7 +144,7 @@ Treatment : Manipulated for experiment
 
 ```sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1)```
 
-**###DIFFERENTIAL GENE EXPRESSION**
+### DIFFERENTIAL GENE EXPRESSION
 
 
 
