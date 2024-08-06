@@ -39,7 +39,8 @@ The input files for the RNAseq analysis are to be  downlaoded from link : https:
 
 **Download the reference genome from this link : 
 
-https://figshare.com/s/f5d63d8c265a05618137.The following files are te refrence files named as chr1_mm10 and the index file named: chr1_mm10.files, chr1_mm10.00.b.tab and chr1_mm10.00.b.array.
+https://figshare.com/s/f5d63d8c265a05618137 
+The following files are te refrence files named as chr1_mm10 and the index file named: chr1_mm10.files, chr1_mm10.00.b.tab and chr1_mm10.00.b.array.
 
 Download all the files given under the R folder.
 
@@ -154,17 +155,18 @@ Treatment : Manipulated for experiment
 ` sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1) `
 
 ### STEP 9:  Differential Gene Expression
+Differential expression is the process of determining the differences in gene expression levels between different biological conditions. It identifies which genes are expressed at different levels under varying experimental conditions, such as treatments, time points, or disease states.
 
 edgeR stores data in a simple list-based data object called a DGEList. This type of object is
 easy to use because it can be manipulated like any list in R. The function readDGE makes a
 DGEList object directly.
 
 dgeFull is a variable here in which we are saving DGEList.
-
+```
 dgeFull <-DGEList(counts=fc$counts, gene=fc$annotation[,c("GeneID","Length")],group=sampleInfo$condition)
-
+```
 The code below filters out genes that have zero counts across all samples.
-
+```
 dgeFull <- DGEList(dgeFull$counts[apply(dgeFull$counts, 1, sum) != 0, ],group=dgeFull$samples$group)
 
 head(dgeFull$counts)
@@ -174,18 +176,18 @@ dgeFull <- calcNormFactors(dgeFull, method="TMM")
 dgeFull$samples
 
 head(dgeFull$counts)
-
+```
 The normLibSizes function normalizes the library sizes in such a way to minimize the log-fold
 changes between the samples for most genes. The default method for computing these scale
 factors uses a trimmed mean of M-values (TMM) between each pair of samples. We
 call the product of the original library size and the scaling factor the **effective library size**,
 i.e., the normalized library size. The effective library size replaces the original library size in
 all downsteam analyses.
-
+```
 eff.lib.size <- dgeFull$samples$lib.size*dgeFull$samples$norm.factors
 
 normCounts <- cpm(dgeFull)
-
+```
 The pseudo-counts represent the equivalent counts would have been
 observed had the library sizes all been equal, assuming the fitted model. The pseudo-counts
 are computed for a specific purpose, and their computation depends on the experimental
@@ -195,11 +197,11 @@ pseudoNormCounts <- log2(normCounts + 1)
 
 The function plotMDS draws a multi-dimensional scaling plot of the RNA samples in which
 distances correspond to leading log-fold-changes between each pair of RNA samples. The
-leading log-fold-change is the average (root-mean-square) of the largest absolute log-foldchanges between each pair of samples.
+leading log-fold-change is the average (root-mean-square) of the largest absolute log-fold changes between each pair of samples.
 
 plotMDS(pseudoNormCounts)
 
-**estimateCommonDisp Estimate Common Negative Binomial Dispersion by Conditional Maximum Likelihood**
+**estimateCommonDisp Estimate Common Negative Binomial Dispersion by Conditional Maximum Likelihood**
 
 dgeFull <- estimateCommonDisp(dgeFull)
 
@@ -210,6 +212,9 @@ dgeFull <- estimateTagwiseDisp(dgeFull)
 
 dgeFull
 
+The exact test is a statistical method used in RNA-seq data analysis to identify differentially expressed genes between experimental groups. This test compares the read counts for each gene between groups, taking into account the estimated dispersion.By performing the exact test, one can determine which genes show statistically significant differences in expression between conditions, providing insights into the underlying biological processes and responses.
+
+```
 dgeTest <- exactTest(dgeFull)
 
 dgeTest
@@ -219,7 +224,7 @@ write.csv(dgeTest, file = "C:/RNAseq using_Rsubread/3219673/dgeTest.csv")
 hist(dgeTest$table[,"PValue"], breaks=50)
 
 hist(dgeTestFilt$table[,"PValue"], breaks=50)
-
+```
 ### Contact
 
 For any questions or issues, please contact Priyanka at priyankathareja10@gmail.com.
