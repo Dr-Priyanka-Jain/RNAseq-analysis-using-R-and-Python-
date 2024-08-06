@@ -76,26 +76,27 @@ https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
 FASTQ files are a common format used to store raw sequence data from high-throughput sequencing experiments. Each FASTQ file contains sequences of nucleotides along with their corresponding quality scores. 
 FastQ files contains raw sequencing reads. Each file represents reads from a specific sample. 
 This step is important because it allows us to identify all the FASTQ files in the directory, ensuring that we process all available samples.
-
-``reads1 <- list.files(path=".", pattern="*.fastq.gz$")``
-
+```
+reads1 <- list.files(path=".", pattern="*.fastq.gz$")
+```
 ### Step 4 : Building Index For Reference Genome
 
 Indexing a reference genome is the process of generating a set of data structures that facilitate rapid access to specific locations within the genomic sequence. 
  Indexing is crucial for improving the performance and speed of downstream analyses, such as alignment and variant detection.
-
-`buildindex(basename="chr1_mm10",reference="chr1.fa")`
-
+```
+buildindex(basename="chr1_mm10",reference="chr1.fa")
+```
 ### Step 5 : Alignment
 
 The next step is to align the RNA-seq reads to the reference genome using the “align” function from the Rsubread package.
 The input format is indicated as “FASTQ” to show the input files are in FASTQ format.
 This process involves mapping the sequence of nucleotides in the genome into a format that can be efficiently searched, enabling bioinformatics tools to quickly locate and align sequencing reads to the reference genome.
+
 The output format is specifies as “BAM” to indicate that the output should be in BAM format.
 The RNA seq reads are aligned with indexed reference genome.
-
-`align(index="chr1_mm10", readfile1=reads1, input_format="FASTQ", output_format="BAM")`
-
+```
+align(index="chr1_mm10", readfile1=reads1, input_format="FASTQ", output_format="BAM")
+```
 ### Step 6 : BAM File
 
 A BAM file (*.bam) is the compressed binary version of a SAM file that is used to represent aligned sequences.
@@ -117,9 +118,9 @@ The alignments section includes the following information for each or read pair:
 - NM: Edit distance tag, which records the Levenshtein distance between the read and the reference.
 
 - XN: Amplicon name tag, which records the amplicon tile ID associated with the read.
-
-`bamfiles <-list.files(path=".",pattern = "*.BAM$")`
-
+```
+bamfiles <-list.files(path=".",pattern = "*.BAM$")
+```
 ### Step 7 : Feature Counts
 
 FeatureCounts is a function under RSubread used in bioinformatics for counting the number of reads (from RNA sequencing) that map to genomic features such as genes, exons, or genomic regions. It is part of the Subread package.
@@ -151,9 +152,9 @@ Sample Info is used to describe the experimental condition associated with each 
 Control : Untreated or baseline state
 
 Treatment : Manipulated for experiment
-
-` sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1) `
-
+```
+sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1)
+```
 ### STEP 9:  Differential Gene Expression
 Differential expression is the process of determining the differences in gene expression levels between different biological conditions. It identifies which genes are expressed at different levels under varying experimental conditions, such as treatments, time points, or disease states.
 
@@ -192,26 +193,25 @@ The pseudo-counts represent the equivalent counts would have been
 observed had the library sizes all been equal, assuming the fitted model. The pseudo-counts
 are computed for a specific purpose, and their computation depends on the experimental
 design as well as the library sizes.
-
+```
 pseudoNormCounts <- log2(normCounts + 1)
-
+```
 The function plotMDS draws a multi-dimensional scaling plot of the RNA samples in which
 distances correspond to leading log-fold-changes between each pair of RNA samples. The
 leading log-fold-change is the average (root-mean-square) of the largest absolute log-fold changes between each pair of samples.
-
+```
 plotMDS(pseudoNormCounts)
-
+```
 **estimateCommonDisp Estimate Common Negative Binomial Dispersion by Conditional Maximum Likelihood**
-
+```
 dgeFull <- estimateCommonDisp(dgeFull)
-
-
-**EstimateTagwiseDisp Estimate Empirical Bayes Tagwise Dispersion Values
-
+```
+**EstimateTagwiseDisp Estimate Empirical Bayes Tagwise Dispersion Values**
+```
 dgeFull <- estimateTagwiseDisp(dgeFull)
 
 dgeFull
-
+```
 The exact test is a statistical method used in RNA-seq data analysis to identify differentially expressed genes between experimental groups. This test compares the read counts for each gene between groups, taking into account the estimated dispersion.By performing the exact test, one can determine which genes show statistically significant differences in expression between conditions, providing insights into the underlying biological processes and responses.
 
 ```
