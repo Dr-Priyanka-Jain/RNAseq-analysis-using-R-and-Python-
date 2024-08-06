@@ -124,9 +124,10 @@ bamfiles <-list.files(path=".",pattern = "*.BAM$")
 ### Step 7 : Feature Counts
 
 FeatureCounts is a function under RSubread used in bioinformatics for counting the number of reads (from RNA sequencing) that map to genomic features such as genes, exons, or genomic regions. It is part of the Subread package.
-The next step is to count the number of reads that map to each gene using the “featureCounts” function.
+
+This step is to count the number of reads that map to each gene using the “featureCounts” function.
+
 This step is crucial because it provides the raw data for differential expression analysis. 
-Feature counting quantifies the number of reads that map to each gene, providing the raw data for subsequent analysis of gene expression.
 ```
 fc <- featureCounts(files=bamfiles,annot.inbuilt="mm10")
 
@@ -136,11 +137,11 @@ fc$stat
 
 head(fc$annotation)
 
-write.csv(fc$counts, file = "C:/Users/SUPER/Documents/fc_data.csv")
+write.csv(fc$counts, file = "path/to/your/directory")
 
-write.csv(fc$annotation, file = "C:/RNAsequsing_Rsubread/3219673/FC_annotation.csv")
+write.csv(fc$annotation, file = "path/to/your/directory")
 
-write.csv(fc$targets, file = "C:/RNAseq_using_Rsubread/3219673/FC_targets.csv")
+write.csv(fc$targets, file = "path/to/your/directory")
 ```
 
 ### Step 8 : Loading Sample Information from the CSV File
@@ -156,11 +157,10 @@ Treatment : Manipulated for experiment
 sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1)
 ```
 ### STEP 9:  Differential Gene Expression
-Differential expression is the process of determining the differences in gene expression levels between different biological conditions. It identifies which genes are expressed at different levels under varying experimental conditions, such as treatments, time points, or disease states.
+Differential expression is the process of determining the differences in gene expression levels between different biological conditions. It identifies which set of genes are expressed at different levels under varying experimental conditions, such as treatments, time points, or disease states.
 
 edgeR stores data in a simple list-based data object called a DGEList. This type of object is
-easy to use because it can be manipulated like any list in R. The function readDGE makes a
-DGEList object directly.
+easy to use because it can be manipulated like any list in R. 
 
 dgeFull is a variable here in which we are saving DGEList.
 ```
@@ -171,20 +171,23 @@ The code below filters out genes that have zero counts across all samples.
 dgeFull <- DGEList(dgeFull$counts[apply(dgeFull$counts, 1, sum) != 0, ],group=dgeFull$samples$group)
 
 head(dgeFull$counts)
+```
+The normLibSizes function normalizes the library sizes in such a way to minimize the log-fold
+changes between the samples for most genes. The default method for computing these scale
+factors uses a trimmed mean of M-values (TMM) between each pair of samples.
 
+TMM stands for Trimmed Mean of M-values. It is a normalization method that adjusts for compositional differences between samples. TMM aims to make the majority of genes have similar expression levels across samples by trimming extreme values and calculating a scaling factor for each sample.
+
+We call the product of the original library size and the scaling factor the **effective library size**,
+i.e., the normalized library size. The effective library size replaces the original library size in
+all downsteam analyses.
+```
 dgeFull <- calcNormFactors(dgeFull, method="TMM")
 
 dgeFull$samples
 
 head(dgeFull$counts)
-```
-The normLibSizes function normalizes the library sizes in such a way to minimize the log-fold
-changes between the samples for most genes. The default method for computing these scale
-factors uses a trimmed mean of M-values (TMM) between each pair of samples. We
-call the product of the original library size and the scaling factor the **effective library size**,
-i.e., the normalized library size. The effective library size replaces the original library size in
-all downsteam analyses.
-```
+
 eff.lib.size <- dgeFull$samples$lib.size*dgeFull$samples$norm.factors
 
 normCounts <- cpm(dgeFull)
@@ -203,10 +206,14 @@ leading log-fold-change is the average (root-mean-square) of the largest absolut
 plotMDS(pseudoNormCounts)
 ```
 **estimateCommonDisp Estimate Common Negative Binomial Dispersion by Conditional Maximum Likelihood**
+
+The estimateCommonDisp function in the edgeR package is used to estimate a common dispersion parameter for a set of counts following a negative binomial distribution. This helps in accurately modeling the data and improving the reliability of downstream analyses, such as identifying differentially expressed genes.
 ```
 dgeFull <- estimateCommonDisp(dgeFull)
 ```
 **EstimateTagwiseDisp Estimate Empirical Bayes Tagwise Dispersion Values**
+
+The estimateTagwiseDisp function refines the RNA-seq data analysis by providing gene-specific dispersion estimates using the empirical Bayes method. This process enhances the accuracy of differential expression analysis by accounting for the unique variability of each gene.
 ```
 dgeFull <- estimateTagwiseDisp(dgeFull)
 
@@ -219,7 +226,7 @@ dgeTest <- exactTest(dgeFull)
 
 dgeTest
 
-write.csv(dgeTest, file = "C:/RNAseq using_Rsubread/3219673/dgeTest.csv")
+write.csv(dgeTest, file = "path/to/your/directory")
 
 hist(dgeTest$table[,"PValue"], breaks=50)
 
