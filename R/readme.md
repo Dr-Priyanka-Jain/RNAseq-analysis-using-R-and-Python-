@@ -73,8 +73,9 @@ https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
 
 ### Step 3 : Listing FASTQ Files for Analysis
 
-FASTQ files are a common format used to store raw sequence data from high-throughput sequencing experiments. Each FASTQ file contains sequences of nucleotides along with their corresponding quality scores. 
+FASTQ files are a common format used to store raw sequence data obtained from high-throughput sequencing experiments. Each FASTQ file contains sequences of nucleotides along with their corresponding quality scores. 
 FastQ files contains raw sequencing reads. Each file represents reads from a specific sample. 
+The format is widely used because it efficiently represents sequencing data and is compatible with many bioinformatics tools for downstream analysis.
 This step is important because it allows us to identify all the FASTQ files in the directory, ensuring that we process all available samples.
 ```
 reads1 <- list.files(path=".", pattern="*.fastq.gz$")
@@ -82,13 +83,15 @@ reads1 <- list.files(path=".", pattern="*.fastq.gz$")
 ### Step 4 : Building Index For Reference Genome
 
 Indexing a reference genome is the process of generating a set of data structures that facilitate rapid access to specific locations within the genomic sequence. 
- Indexing is crucial for improving the performance and speed of downstream analyses, such as alignment and variant detection.
+Indexing is crucial for improving the performance and speed of downstream analyses, such as alignment and variant detection.
+
+It is akin to creating a table of contents for a book, where each chapter or section corresponds to a specific region in the genome. This process organizes the sequence data into a structure that allows tools to quickly locate and retrieve specific segments, much like flipping to a chapter by its page number.
 ```
 buildindex(basename="chr1_mm10",reference="chr1.fa")
 ```
 ### Step 5 : Alignment
 
-The next step is to align the RNA-seq reads to the reference genome using the “align” function from the Rsubread package.
+The next step is to align the RNA-seq reads which is the FASTQ files to the reference genome using the “align” function from the Rsubread package.
 The input format is indicated as “FASTQ” to show the input files are in FASTQ format.
 This process involves mapping the sequence of nucleotides in the genome into a format that can be efficiently searched, enabling bioinformatics tools to quickly locate and align sequencing reads to the reference genome.
 
@@ -99,7 +102,7 @@ align(index="chr1_mm10", readfile1=reads1, input_format="FASTQ", output_format="
 ```
 ### Step 6 : BAM File
 
-A BAM file (*.bam) is the compressed binary version of a SAM file that is used to represent aligned sequences.
+A BAM (Binary Alignment Map) file (*.bam) is the compressed binary version of a SAM(Sequence Alignment Map) file that is used to represent aligned sequences.
 BAM files store aligned sequence data, which includes information on where each read maps to the reference genome.
 BAM files contain a header section and an alignment section:
 Header—Contains information about the entire file, such as sample name, sample length, and alignment method. Alignments in the alignments section are associated with specific information in the header section.
@@ -153,6 +156,12 @@ Sample Info is used to describe the experimental condition associated with each 
 Control : Untreated or baseline state
 
 Treatment : Manipulated for experiment
+
+File	                               Condition
+SRR1552444.fastq.gz.subread.BAM	       V
+SRR1552445.fastq.gz.subread.BAM	       V
+SRR1552454.fastq.gz.subread.BAM"	      L
+SRR1552455.fastq.gz.subread.BAM	       L
 ```
 sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1)
 ```
@@ -180,7 +189,7 @@ TMM stands for Trimmed Mean of M-values. It is a normalization method that adjus
 
 We call the product of the original library size and the scaling factor the **effective library size**,
 i.e., the normalized library size. The effective library size replaces the original library size in
-all downsteam analyses.
+all downstream analyses.
 ```
 dgeFull <- calcNormFactors(dgeFull, method="TMM")
 
@@ -195,25 +204,34 @@ normCounts <- cpm(dgeFull)
 The pseudo-counts represent the equivalent counts would have been
 observed had the library sizes all been equal, assuming the fitted model. The pseudo-counts
 are computed for a specific purpose, and their computation depends on the experimental
-design as well as the library sizes.
+design as well as the library sizes. 
+Log transformation reduces the influence of highly expressed genes, making patterns in lower-expressed genes easier to identify.
 ```
 pseudoNormCounts <- log2(normCounts + 1)
 ```
 The function plotMDS draws a multi-dimensional scaling plot of the RNA samples in which
 distances correspond to leading log-fold-changes between each pair of RNA samples. The
 leading log-fold-change is the average (root-mean-square) of the largest absolute log-fold changes between each pair of samples.
+
+It generates an MDS plot, where the distance between points (samples) represents the similarity of their gene expression profiles
+
 ```
 plotMDS(pseudoNormCounts)
 ```
 **estimateCommonDisp Estimate Common Negative Binomial Dispersion by Conditional Maximum Likelihood**
 
 The estimateCommonDisp function in the edgeR package is used to estimate a common dispersion parameter for a set of counts following a negative binomial distribution. This helps in accurately modeling the data and improving the reliability of downstream analyses, such as identifying differentially expressed genes.
+
+It estimates a common dispersion parameter for all genes in the dataset. Dispersion reflects the variability of gene expression across replicates and is critical for modeling RNA-Seq data using a negative binomial distribution.
 ```
 dgeFull <- estimateCommonDisp(dgeFull)
 ```
 **EstimateTagwiseDisp Estimate Empirical Bayes Tagwise Dispersion Values**
 
 The estimateTagwiseDisp function refines the RNA-seq data analysis by providing gene-specific dispersion estimates using the empirical Bayes method. This process enhances the accuracy of differential expression analysis by accounting for the unique variability of each gene.
+
+It computes tagwise dispersion values for each gene using an empirical Bayes approach. Unlike the common dispersion, tagwise dispersion accounts for gene-specific variability.
+
 ```
 dgeFull <- estimateTagwiseDisp(dgeFull)
 
@@ -221,13 +239,19 @@ dgeFull
 ```
 The exact test is a statistical method used in RNA-seq data analysis to identify differentially expressed genes between experimental groups. This test compares the read counts for each gene between groups, taking into account the estimated dispersion.By performing the exact test, one can determine which genes show statistically significant differences in expression between conditions, providing insights into the underlying biological processes and responses.
 
+This test compares read counts for each gene while accounting for the estimated dispersion.
+
 ```
 dgeTest <- exactTest(dgeFull)
 
 dgeTest
 
 write.csv(dgeTest, file = "path/to/your/directory")
+```
+The P-value histogram helps evaluate the analysis quality. A peak near zero indicates a strong signal (many genes are differentially expressed), 
+while a uniform distribution suggests no significant differences.
 
+```
 hist(dgeTest$table[,"PValue"], breaks=50)
 
 hist(dgeTestFilt$table[,"PValue"], breaks=50)
