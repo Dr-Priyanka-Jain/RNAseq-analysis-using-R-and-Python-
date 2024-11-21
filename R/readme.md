@@ -159,8 +159,11 @@ Treatment : Manipulated for experiment
 
 File	                               Condition
 SRR1552444.fastq.gz.subread.BAM	       V
+
 SRR1552445.fastq.gz.subread.BAM	       V
+
 SRR1552454.fastq.gz.subread.BAM"	      L
+
 SRR1552455.fastq.gz.subread.BAM	       L
 ```
 sampleInfo <- read.table("sample_info.csv", header=TRUE, sep=",", row.names=1)
