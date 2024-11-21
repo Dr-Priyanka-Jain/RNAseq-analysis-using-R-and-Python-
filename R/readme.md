@@ -158,6 +158,7 @@ Control : Untreated or baseline state
 Treatment : Manipulated for experiment
 
 File	                               Condition
+
 SRR1552444.fastq.gz.subread.BAM	       V
 
 SRR1552445.fastq.gz.subread.BAM	       V
@@ -257,7 +258,6 @@ while a uniform distribution suggests no significant differences.
 ```
 hist(dgeTest$table[,"PValue"], breaks=50)
 
-hist(dgeTestFilt$table[,"PValue"], breaks=50)
 ```
 ### Contact
 
